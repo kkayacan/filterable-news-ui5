@@ -16,3 +16,5 @@ mergedManifestDescriptor.json
 APIExternalProducer.js
 .*/APIExternalProducer.js
 /webapp/model/constants.json
+/webapp/html/title.html
+/dist/

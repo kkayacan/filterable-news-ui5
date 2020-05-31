@@ -1,0 +1,101 @@
+<View controllerName="com.fnews.ui5.controller.List" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<FlexBox justifyContent="Center">
+		<VBox width="750px">
+			<List id="newsList" headerText="" width="auto" growing="true" growingThreshold="10" growingScrollToLoad="true" items="{path: '/'}"
+				updateStarted="onUpdateStarted" showNoData="false">
+				<items>
+					<CustomListItem class="sapUiTinyMargin">
+						<VBox>
+							<Image src="{image}" visible="{= ${image} !== null}" width="100%" fieldGroupIds="detailLink" custom:id="{id}"/>
+							<Panel expandable="true" width="auto" class="linksPanel" visible="{= ${view>/showChains} ? ${precedingStories}.length > 0 : false}">
+								<headerToolbar>
+									<Toolbar fieldGroupIds="panelHeader">
+										<content>
+											<Text text='{i18n>precedingStoriesPanel}'/>
+										</content>
+									</Toolbar>
+								</headerToolbar>
+								<content>
+									<List headerText="" width="auto" items="{path: 'precedingStories'}" showSeparators="Inner" growing="true" growingThreshold="5">
+										<items>
+											<CustomListItem class="sapUiTinyMargin">
+												<VBox>
+													<Text
+														text="{path:'pubDate', type:'sap.ui.model.type.Date', formatOptions: {source : {pattern: 'yyyy-MM-dd HH:mm:ss z'}, pattern: 'd MMM yyyy EEE HH:mm', relative: true, relativeScale: 'hour'} }"
+														tooltip="{path:'pubDate', type:'sap.ui.model.type.Date', formatOptions: {source : {pattern: 'yyyy-MM-dd HH:mm:ss z'}, pattern: 'd MMM yyyy EEE HH:mm'} }"/>
+													<Text text="{title}" fieldGroupIds="detailLink" custom:id="{id}"/>
+												</VBox>
+											</CustomListItem>
+										</items>
+									</List>
+								</content>
+							</Panel>
+							<HBox>
+								<FlexBox fitContainer="true" alignItems="Center" justifyContent="Start" width="50%" class="sapUiTinyMarginBegin">
+									<HBox alignItems="Center">
+										<Image src="{= './img/' + ${categories/0/gCat} + '.png'}" height="30px" width="30px"/>
+										<Text text="{ path: 'categories', formatter: '.formatter.buildCategoryText' }" class="sapUiTinyMarginBegin"/>
+									</HBox>
+								</FlexBox>
+								<FlexBox fitContainer="true" alignItems="Center" justifyContent="End" width="50%" class="sapUiSmallMarginEnd">
+									<Text
+										text="{path:'pubDate', type:'sap.ui.model.type.Date', formatOptions: {source : {pattern: 'yyyy-MM-dd HH:mm:ss z'}, pattern: 'd MMM yyyy EEE', relative: true, relativeScale: 'hour'} }"
+										tooltip="{path:'pubDate', type:'sap.ui.model.type.Date', formatOptions: {source : {pattern: 'yyyy-MM-dd HH:mm:ss z'}, pattern: 'd MMM yyyy EEE HH:mm'} }"/>
+									<core:Icon src="sap-icon://share-2" class="sapUiTinyMarginBegin size1" press="onSharePress" visible="{device>/system/phone}"
+										custom:id="{id}" custom:title="{title}"/>
+								</FlexBox>
+							</HBox>
+							<Title level="H1" text="{title}" wrapping="true" class="sapUiTinyMargin" fieldGroupIds="detailLink" custom:id="{id}"/>
+							<Text text="{excerpt}" class="sapUiTinyMargin" fieldGroupIds="detailLink" custom:id="{id}"/>
+							<Panel expandable="true" width="auto" class="linksPanel">
+								<headerToolbar>
+									<Toolbar fieldGroupIds="panelHeader">
+										<content>
+											<Text text='{i18n>articlesPanel}'/>
+										</content>
+									</Toolbar>
+								</headerToolbar>
+								<content>
+									<List headerText="" width="auto" items="{path: 'articles'}" showSeparators="Inner">
+										<items>
+											<CustomListItem class="sapUiTinyMargin">
+												<VBox>
+													<Link text="{source}" target="_blank" href="{articleUrl}"/>
+													<Text text="{title}"/>
+												</VBox>
+											</CustomListItem>
+										</items>
+									</List>
+								</content>
+							</Panel>
+							<Panel expandable="true" width="auto" class="linksPanel" visible="{= ${view>/showChains} ? ${succeedingStories}.length > 0 : false}">
+								<headerToolbar>
+									<Toolbar fieldGroupIds="panelHeader">
+										<content>
+											<Text text='{i18n>succeedingStoriesPanel}'/>
+										</content>
+									</Toolbar>
+								</headerToolbar>
+								<content>
+									<List headerText="" width="auto" items="{path: 'succeedingStories'}" showSeparators="Inner" growing="true" growingThreshold="5">
+										<items>
+											<CustomListItem class="sapUiTinyMargin">
+												<VBox>
+													<Text
+														text="{path:'pubDate', type:'sap.ui.model.type.Date', formatOptions: {source : {pattern: 'yyyy-MM-dd HH:mm:ss z'}, pattern: 'd MMM yyyy EEE HH:mm', relative: true, relativeScale: 'hour'} }"
+														tooltip="{path:'pubDate', type:'sap.ui.model.type.Date', formatOptions: {source : {pattern: 'yyyy-MM-dd HH:mm:ss z'}, pattern: 'd MMM yyyy EEE HH:mm'} }"/>
+													<Text text="{title}" fieldGroupIds="detailLink" custom:id="{id}"/>
+												</VBox>
+											</CustomListItem>
+										</items>
+									</List>
+								</content>
+							</Panel>
+						</VBox>
+					</CustomListItem>
+				</items>
+			</List>
+		</VBox>
+	</FlexBox>
+</View>

@@ -72,10 +72,12 @@ sap.ui.define([
 						oFilterModel.getData().filterText = aNewsData[0].title;
 						oFilterModel.refresh(true);
 						document.title = aNewsData[0].title + " - [Top News]";
+						/*
 						$("head").append('<meta property=”og:title” content=”' + document.title + '” />');
 						$("head").append('<meta property=”og:type” content=”website” />');
 						$("head").append('<meta property=”og:url” content=”' + window.location.href + '” />');
 						$("head").append('<meta property=”og:image” content=”' + aNewsData[0].urlToImage + '” />');
+						*/
 					}
 				}
 

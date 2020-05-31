@@ -118,6 +118,10 @@ sap.ui.define([
 			if (iOffset >= 0) {
 				sUrl = sUrl.substr(0, iOffset);
 			}
+			iOffset = sUrl.search("\\?");
+			if (iOffset >= 0) {
+				sUrl = sUrl.substr(0, iOffset);
+			}
 			return sUrl;
 		},
 

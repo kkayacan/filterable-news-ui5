@@ -59,13 +59,13 @@ sap.ui.define([
 			this.getOwnerComponent().setModel(oApiModel, "api");
 			oApiModel.attachRequestCompleted(function () {
 				aNewsData = that.getOwnerComponent().getModel().getData();
-				oApiModel.getData().forEach(function (oItem) {
+				oApiModel.getData().stories.forEach(function (oItem) {
 					aNewsData.push(oItem);
 				});
 				oNewsModel.setData(aNewsData);
 				oNewsModel.refresh(true);
 
-				var iOffset = oTrackData.hash.search("i/");
+				iOffset = oTrackData.hash.search("i/");
 				if (iOffset >= 0) {
 					if (aNewsData.length > 0) {
 						var oFilterModel = that.getOwnerComponent().getModel("filter");
@@ -117,7 +117,7 @@ sap.ui.define([
 			if (navigator.share) {
 				navigator.share({
 					title: this.getCustomData(oEvent.getSource(), "title"),
-					url: this.getBaseUrl() + "?i=" + this.getCustomData(oEvent.getSource(), "id")
+					url: this.getBaseUrl() + "#/i/" + this.getCustomData(oEvent.getSource(), "id")
 				});
 			}
 		}

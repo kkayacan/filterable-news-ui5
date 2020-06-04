@@ -26,7 +26,7 @@ sap.ui.define([
 			for (i = 0; i < aDetailLinks.length; i++) {
 				aDetailLinks[i].attachBrowserEvent("mousedown", function (oEvent) {
 					var sUrl = that.getBaseUrl();
-					sUrl = sUrl + "?i=" + that.getCustomData(this, "id");
+					sUrl = sUrl + "#/i/" + that.getCustomData(this, "id");
 					window.open(sUrl, "_blank");
 				});
 			}

@@ -122,6 +122,11 @@ sap.ui.define([
 			if (iOffset >= 0) {
 				sUrl = sUrl.substr(0, iOffset);
 			}
+			/*
+			if (sUrl[sUrl.length - 1] !== "/") {
+				sUrl += "/";
+			}
+			*/
 			return sUrl;
 		},
 

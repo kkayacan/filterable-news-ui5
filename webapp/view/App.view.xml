@@ -1,7 +1,7 @@
 <mvc:View controllerName="com.fnews.ui5.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
 	<SplitApp id="SplitApp" initialDetail="detail" initialMaster="master">
 		<detailPages>
-			<Page id="detail" title="Filter text here" backgroundDesign="Solid" class="sapUiStdPage">
+			<Page id="detail" title="" backgroundDesign="Solid" class="sapUiStdPage">
 				<customHeader>
 					<Bar>
 						<contentLeft>

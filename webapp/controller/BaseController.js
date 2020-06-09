@@ -9,15 +9,6 @@ sap.ui.define([
 	return Controller.extend("com.fnews.ui5.controller.BaseController", {
 
 		/**
-		 * Convenience method for accessing the router.
-		 * @public
-		 * @returns {sap.ui.core.routing.Router} the router for this component
-		 */
-		getRouter: function () {
-			return UIComponent.getRouterFor(this);
-		},
-
-		/**
 		 * Convenience method for getting the view model by name.
 		 * @public
 		 * @param {string} [sName] the model name
@@ -47,87 +38,29 @@ sap.ui.define([
 			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
 		},
 
-		setFilters: function (that, oCategoriesModel) {
-			var oFilterModel = that.getOwnerComponent().getModel("filter");
-			var oFilterData = oFilterModel.getData();
+		buildUrl: function (sParamString) {
+			var sNewParamString = "";
 			var iOffset = window.location.href.search("\\?");
 			if (iOffset >= 0) {
-				var sParam = window.location.href.substr(iOffset + 1);
-				iOffset = sParam.search("i=");
-				if (iOffset >= 0) {
-					sParam = sParam.substr(iOffset + 2);
-					iOffset = sParam.search(/[^0-9]/);
-					if (iOffset >= 0) {
-						sParam = sParam.substr(0, iOffset);
-					}
-					sParam = "i/" + sParam;
-				} else {
-					sParam = "";
-				}
-			} else {
-				var oHashChanger = HashChanger.getInstance();
-				oHashChanger.init();
-				sParam = oHashChanger.getHash();
-			}
-			var sHash = sParam;
-			iOffset = sHash.search("h/");
-			if (iOffset >= 0) {
-				iOffset += 2;
-				sHash = sHash.substr(iOffset);
-				iOffset = sHash.search("/");
-				if (iOffset >= 0) {
-					sHash = sHash.substr(0, iOffset);
-				}
-				oFilterData.hours = parseInt(sHash, 10);
-				oFilterData.filterText = that.getResourceBundle().getText("last") + " " + oFilterData.hours + " " + that.getResourceBundle().getText(
-					"hours");
-			}
-
-			sHash = sParam;
-			iOffset = sHash.search("c/");
-			if (iOffset >= 0) {
-				iOffset += 2;
-				sHash = sHash.substr(iOffset);
-				iOffset = sHash.search("/");
-				if (iOffset >= 0) {
-					sHash = sHash.substr(0, iOffset);
-				}
-				var aHashCategories = sHash.split("-");
-				var aCategoriesData = that.getOwnerComponent().getModel("categories").getData();
-				aCategoriesData.forEach(function (oCategory) {
-					oCategory.selected = false;
-					aHashCategories.forEach(function (sHashCategory) {
-						if (sHashCategory === oCategory.id) {
-							oCategory.selected = true;
-							if (oFilterData.filterText.length > 0) {
-								oFilterData.filterText += ", ";
-							}
-							oFilterData.filterText += that.getResourceBundle().getText(oCategory.gCat);
+				var sBaseUrl = window.location.href.substr(0, iOffset + 1);
+				var sCurrentParamString = window.location.href.substr(iOffset + 1);
+				var aUrlParams = sCurrentParamString.split("&");
+				var i = 0;
+				aUrlParams.forEach(function (oParam) {
+					iOffset = oParam.search("=");
+					if (iOffset > 1) {
+						i++;
+						if (i === 1) {
+							sNewParamString = oParam;
+						} else {
+							sNewParamString = sNewParamString + "&" + oParam;
 						}
-					});
+					}
 				});
-				oCategoriesModel.refresh(true);
+			} else {
+				sBaseUrl = window.location.href + "?";
 			}
-
-			oFilterModel.refresh(true);
-		},
-
-		getBaseUrl: function () {
-			var sUrl = window.location.href;
-			var iOffset = sUrl.search("#/");
-			if (iOffset >= 0) {
-				sUrl = sUrl.substr(0, iOffset);
-			}
-			iOffset = sUrl.search("\\?");
-			if (iOffset >= 0) {
-				sUrl = sUrl.substr(0, iOffset);
-			}
-			/*
-			if (sUrl[sUrl.length - 1] !== "/") {
-				sUrl += "/";
-			}
-			*/
-			return sUrl;
+			return sBaseUrl + sNewParamString + (sNewParamString.length > 0 ? "&" : "") + sParamString;
 		},
 
 		getCustomData: function (oControl, sKey) {

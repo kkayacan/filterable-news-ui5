@@ -8,10 +8,10 @@
 		<Text text="{i18n>hours}"/>
 	</FlexBox>
 	<Title level="H1" text="{i18n>categories}" wrapping="true" class="sapUiMediumMarginTop sapUiMediumMarginBegin"/>
-	<List id="categoriesList" headerText="" width="auto" items="{categories>/}" showNoData="false" backgroundDesign="Transparent"
-		showSeparators="None" class="sapUiSmallMarginBegin">
+	<List id="categoriesList" headerText="" width="auto" items="{filter>/dynamicFilters/categories}" showNoData="false"
+		backgroundDesign="Transparent" showSeparators="None" class="sapUiSmallMarginBegin">
 		<CustomListItem>
-			<CheckBox text="{ path : 'categories>gCat', formatter : '.formatter.getI18nValue' }" selected="{categories>selected}"/>
+			<CheckBox text="{ path : 'filter>gCat', formatter : '.formatter.getI18nValue' }" selected="{filter>selected}"/>
 		</CustomListItem>
 	</List>
 </View>

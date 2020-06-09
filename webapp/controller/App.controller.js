@@ -1,8 +1,8 @@
 sap.ui.define([
 	"./BaseController",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/routing/HashChanger"
-], function (BaseController, JSONModel, HashChanger) {
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, JSONModel, BusyIndicator) {
 	"use strict";
 
 	return BaseController.extend("com.fnews.ui5.controller.App", {
@@ -11,46 +11,36 @@ sap.ui.define([
 			this.byId("SplitApp").toDetail(this.createId("detail"));
 		},
 
-		onAfterRendering: function () {
-			var that = this;
-			var aPanels = sap.ui.getCore().byFieldGroupId("panelHeader");
-			for (var i = 0; i < aPanels.length; i++) {
-				aPanels[i].attachBrowserEvent("mousedown", function () {
-					if (typeof this.getParent().setExpanded === 'function') {
-						this.getParent().setExpanded(!this.getParent().getExpanded());
-					}
-				});
-			}
-
-			var aDetailLinks = sap.ui.getCore().byFieldGroupId("detailLink");
-			for (i = 0; i < aDetailLinks.length; i++) {
-				aDetailLinks[i].attachBrowserEvent("mousedown", function (oEvent) {
-					var sUrl = that.getBaseUrl();
-					sUrl = sUrl + "#/i/" + that.getCustomData(this, "id");
-					window.open(sUrl, "_blank");
-				});
-			}
-		},
-
 		onSearch: function () {
-			var sHash = "";
+			BusyIndicator.show();
+			this.getModel().setData([]);
 			var i = 0;
-			var oCategoriesData = this.getModel("categories").getData();
-			oCategoriesData.forEach(function (oItem) {
-				if (oItem.hasOwnProperty("selected") && oItem.selected === true) {
+			var oFilterData = this.getModel("filter").getData();
+			oFilterData.urlParamString = "";
+			oFilterData.apiParamString = "";
+			oFilterData.offset = oFilterData.defaultOffset;
+			oFilterData.dynamicFilters.categories.forEach(function (oCategory) {
+				if (oCategory.hasOwnProperty("selected") && oCategory.selected === true) {
 					i++;
 					if (i === 1) {
-						sHash = "c/" + oItem.id;
+						oFilterData.urlParamString = "c=" + oCategory.id;
+						oFilterData.apiParamString = "/c/" + oCategory.id;
 					} else {
-						sHash = sHash + "-" + oItem.id;
+						oFilterData.urlParamString = oFilterData.urlParamString + "-" + oCategory.id;
+						oFilterData.apiParamString = oFilterData.apiParamString + "-" + oCategory.id;
 					}
 				}
 			});
-			if (sHash.length > 0) {
-				sHash = sHash + "/";
+			if (oFilterData.urlParamString.length > 0) {
+				oFilterData.urlParamString += "&";
 			}
-			sHash = sHash + "h/" + this.getModel("filter").getData().hours;
-			HashChanger.getInstance().replaceHash(sHash);
+			oFilterData.urlParamString = oFilterData.urlParamString + "h=" + oFilterData.hours;
+			oFilterData.apiParamString = oFilterData.apiParamString + "/h/" + oFilterData.hours;
+			this.getModel("api").loadData(this.getModel("constants").getData().api_url + oFilterData.apiParamString);
+			var sNewUrl = this.buildUrl(oFilterData.urlParamString);
+			window.history.pushState({
+				path: sNewUrl
+			}, "", sNewUrl);
 			this.byId("SplitApp").toDetail(this.createId("detail"));
 		},
 

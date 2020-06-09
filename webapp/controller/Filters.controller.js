@@ -15,25 +15,10 @@ sap.ui.define([
 		/* =========================================================== */
 
 		/**
-		 * Called when the worklist controller is instantiated.
+		 * Called when the controller is instantiated.
 		 * @public
 		 */
 		onInit: function () {
-			var that = this;
-
-			var oConstantsModel = this.getOwnerComponent().getModel("constants");
-			oConstantsModel.attachRequestCompleted(function () {
-				var sCategoriesUrl = this.getOwnerComponent().getModel("constants").getData().api_url.replace("news", "categories");
-			});
-
-			var sCategoriesUrl = this.getOwnerComponent().getModel("constants").getData().api_url.replace("news", "categories");
-
-			//var sCategoriesUrl = "https://api.haber.keremkayacan.com/report/categories/";
-			var oCategoriesModel = new JSONModel(sCategoriesUrl);
-			this.getOwnerComponent().setModel(oCategoriesModel, "categories");
-			oCategoriesModel.attachRequestCompleted(function () {
-				that.setFilters(that, oCategoriesModel);
-			});
 
 		}
 

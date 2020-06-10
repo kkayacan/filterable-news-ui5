@@ -19,10 +19,7 @@ sap.ui.define([
 		 * @public
 		 */
 		onInit: function () {
-			// 			$("head").append('<meta property=”og:title” content=”' + document.title + '” />');
-			// 			$("head").append('<meta property=”og:type” content=”website” />');
-			// 			$("head").append('<meta property=”og:url” content=”' + window.location.href + '” />');
-			// 			$("head").append('<meta property=”og:image” content=”' + aNewsData[0].urlToImage + '” />');
+
 		},
 
 		onAfterRendering: function () {

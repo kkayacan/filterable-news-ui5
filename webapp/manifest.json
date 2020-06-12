@@ -7,13 +7,7 @@
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
 		"applicationVersion": {
-			"version": "0.2.7"
-		},
-		"dataSources": {
-			"constants_file": {
-				"uri": "model/constants.json",
-				"type": "JSON"
-			}
+			"version": "0.2.9"
 		}
 	},
 	"sap.ui": {
@@ -43,11 +37,6 @@
 				"settings": {
 					"bundleName": "com.fnews.ui5.i18n.i18n"
 				}
-			},
-			"constants": {
-				"type": "sap.ui.model.json.JSONModel",
-				"dataSource": "constants_file",
-				"preload": true
 			}
 		},
 		"resources": {

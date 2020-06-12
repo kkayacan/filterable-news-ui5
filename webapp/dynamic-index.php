@@ -2,16 +2,15 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>[Top News]</title>
 	<?php
 		$offset = strpos($_SERVER['REQUEST_URI'], "?i=");
 		if ($offset >= 0) {
 			$id = substr($_SERVER['REQUEST_URI'], $offset + 3);
-			$constants_string = file_get_contents("model/constants.json");
-			$constants = json_decode($constants_string, true);
+			$constants = json_decode(file_get_contents("model/constants.json"), true);
 			$api_url = str_replace("news", "meta/i/" . $id, $constants["api_url"]);
-			$meta_string = file_get_contents($api_url);
-			$meta = json_decode($meta_string, true);
+			$meta = json_decode(file_get_contents($api_url), true);
 			echo '<meta property="og:title" content="' . $meta["title"] . '"/>';
 			echo '<meta property="og:type" content="website"/>';
 			echo '<meta property="og:url" content="' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . '"/>';

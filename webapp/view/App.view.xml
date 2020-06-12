@@ -1,33 +1,35 @@
 <mvc:View controllerName="com.fnews.ui5.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
-	<SplitApp id="SplitApp" initialDetail="detail" initialMaster="master">
-		<detailPages>
-			<Page id="detail" title="" backgroundDesign="Solid" class="sapUiStdPage">
-				<customHeader>
-					<Bar>
-						<contentLeft>
-							<Button icon="sap-icon://menu2" press="onToMaster" visible="{device>/system/phone}"/>
-						</contentLeft>
-						<contentMiddle>
-							<Text text="{filter>/filterText}"/>
-						</contentMiddle>
-						<contentRight>
-							<Button icon="sap-icon://chain-link" tooltip="{i18n>showChains}" press="onShowChains"/>
-							<Button icon="sap-icon://back-to-top" tooltip="{i18n>scrollToTop}" press="onScrollToTop"/>
-						</contentRight>
-					</Bar>
-				</customHeader>
-				<mvc:XMLView id="listView" viewName="com.fnews.ui5.view.List"/>
-			</Page>
-		</detailPages>
-		<masterPages>
-			<Page id="master" title="{i18n>filters}" backgroundDesign="List" class="sapUiStdPage">
-				<mvc:XMLView id="filtersView" viewName="com.fnews.ui5.view.Filters"/>
-				<footer>
-					<Toolbar>
-						<Button text="{i18n>search}" press="onSearch" width="100%"/>
-					</Toolbar>
-				</footer>
-			</Page>
-		</masterPages>
-	</SplitApp>
+	<Shell>
+		<SplitApp id="SplitApp" initialDetail="detail" initialMaster="master" homeIcon="img/home-precomposed.png">
+			<detailPages>
+				<Page id="detail" title="" backgroundDesign="Solid" class="sapUiStdPage">
+					<customHeader>
+						<Bar>
+							<contentLeft>
+								<Button icon="sap-icon://menu2" press="onToMaster" visible="{device>/system/phone}"/>
+							</contentLeft>
+							<contentMiddle>
+								<Text text="{filter>/filterText}"/>
+							</contentMiddle>
+							<contentRight>
+								<Button icon="sap-icon://chain-link" tooltip="{i18n>showChains}" press="onShowChains"/>
+								<Button icon="sap-icon://back-to-top" tooltip="{i18n>scrollToTop}" press="onScrollToTop"/>
+							</contentRight>
+						</Bar>
+					</customHeader>
+					<mvc:XMLView id="listView" viewName="com.fnews.ui5.view.List"/>
+				</Page>
+			</detailPages>
+			<masterPages>
+				<Page id="master" title="{i18n>filters}" backgroundDesign="List" class="sapUiStdPage">
+					<mvc:XMLView id="filtersView" viewName="com.fnews.ui5.view.Filters"/>
+					<footer>
+						<Toolbar>
+							<Button text="{i18n>search}" press="onSearch" width="100%"/>
+						</Toolbar>
+					</footer>
+				</Page>
+			</masterPages>
+		</SplitApp>
+	</Shell>
 </mvc:View>

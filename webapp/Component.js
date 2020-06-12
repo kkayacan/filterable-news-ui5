@@ -14,9 +14,13 @@ sap.ui.define([
 			UIComponent.prototype.init.apply(this, arguments);
 			BusyIndicator.show();
 			this.createClientModels();
-			this.fetchDynamicFilters();
 			this.parseUrlParameters();
-			this.createApiModel();
+			var oConstantsModel = new JSONModel("model/constants.json");
+			this.setModel(oConstantsModel, "constants");
+			oConstantsModel.attachRequestCompleted(function () {
+				this.fetchDynamicFilters();
+				this.createApiModel();
+			}.bind(this));
 		},
 
 		createClientModels: function () {

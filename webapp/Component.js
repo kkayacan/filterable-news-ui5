@@ -19,7 +19,6 @@ sap.ui.define([
 			this.setModel(oConstantsModel, "constants");
 			oConstantsModel.attachRequestCompleted(function () {
 				this.fetchDynamicFilters();
-				this.createApiModel();
 			}.bind(this));
 		},
 
@@ -48,6 +47,7 @@ sap.ui.define([
 				var oFilterModel = this.getModel("filter");
 				oFilterModel.getData().dynamicFilters = oDynamicFiltersModel.getData();
 				oFilterModel.refresh(true);
+				this.createApiModel();
 			}.bind(this));
 			oDynamicFiltersModel.loadData(sFiltersUrl);
 		},

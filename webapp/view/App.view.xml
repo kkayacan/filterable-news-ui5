@@ -1,5 +1,5 @@
 <mvc:View controllerName="com.fnews.ui5.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
-	<Shell>
+	<Shell showLogout="false">
 		<SplitApp id="SplitApp" initialDetail="detail" initialMaster="master" homeIcon="img/home-precomposed.png">
 			<detailPages>
 				<Page id="detail" title="" backgroundDesign="Solid" class="sapUiStdPage">
@@ -9,7 +9,7 @@
 								<Button icon="sap-icon://menu2" press="onToMaster" visible="{device>/system/phone}"/>
 							</contentLeft>
 							<contentMiddle>
-								<Text text="{filter>/filterText}"/>
+								<Image src="img/logo.png" class="sapUiMediumMargin logo"/>
 							</contentMiddle>
 							<contentRight>
 								<Button icon="sap-icon://chain-link" tooltip="{i18n>showChains}" press="onShowChains"/>
@@ -17,6 +17,9 @@
 							</contentRight>
 						</Bar>
 					</customHeader>
+					<FlexBox justifyContent="Center">
+						<Title level="H1" text="{filter>/filterText}" textAlign="Center" wrapping="true" class="sapUiTinyMargin"/>
+					</FlexBox>
 					<mvc:XMLView id="listView" viewName="com.fnews.ui5.view.List"/>
 				</Page>
 			</detailPages>

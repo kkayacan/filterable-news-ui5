@@ -17,7 +17,7 @@
 							</contentRight>
 						</Bar>
 					</customHeader>
-					<FlexBox justifyContent="Center">
+					<FlexBox justifyContent="Center" visible="{= ${filter>/filterText}.length > 0}">
 						<Title level="H1" text="{filter>/filterText}" textAlign="Center" wrapping="true" class="sapUiTinyMargin"/>
 					</FlexBox>
 					<mvc:XMLView id="listView" viewName="com.fnews.ui5.view.List"/>

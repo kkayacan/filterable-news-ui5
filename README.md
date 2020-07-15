@@ -1,7 +1,7 @@
 # filterable-news-ui5
 OpenUI5 frontend for [filterable-news-api](https://github.com/kkayacan/filterable-news-api). Feel free to report bugs, suggest features and contribute.
 
-A live version with Turkish news can be found at [haber.keremkayacan.com](https://haber.keremkayacan.com)
+A live version with Turkish news can be found at [gundem24.net](https://gundem24.net)
 
 ## Setup
 1. [Optional] Build project with either [SAP Web IDE](https://developers.sap.com/topics/sap-webide.html) or [ui5-builder](https://github.com/SAP/ui5-builder)

@@ -113,7 +113,7 @@ sap.ui.define([
 				}
 			}.bind(this));
 			if (oApiData.appliedFilters.hasOwnProperty("i")) {
-				oFilterData.filterText = oApiData.stories[0].title;
+				oFilterData.filterText = "";
 			}
 			oFilterModel.refresh(true);
 		},

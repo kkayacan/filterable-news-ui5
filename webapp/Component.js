@@ -133,7 +133,9 @@ sap.ui.define([
 					}
 				}.bind(this));
 			}
-			oFilterData.oTopicInput.setTokens(aTokens);
+			if (!$.isEmptyObject(oFilterData.oTopicInput)) {
+				oFilterData.oTopicInput.setTokens(aTokens);
+			}
 			if (oApiData.appliedFilters.hasOwnProperty("i")) {
 				oFilterData.filterText = "";
 			}

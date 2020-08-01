@@ -18,8 +18,8 @@ sap.ui.define([
 		 * Called when the controller is instantiated.
 		 * @public
 		 */
-		onInit: function () {
-
+		onAfterRendering: function () {
+			this.getModel("filter").getData().oTopicInput = this.byId("topicInput");
 		}
 
 	});

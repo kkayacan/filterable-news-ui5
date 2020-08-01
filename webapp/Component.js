@@ -35,7 +35,9 @@ sap.ui.define([
 				defaultOffset: 20,
 				offset: 20,
 				limit: 10,
-				hours: 24
+				hours: 24,
+				selectedTopics: [],
+				oTopicInput: {}
 			}), "filter");
 			this.setModel(new JSONModel([]));
 		},
@@ -46,6 +48,7 @@ sap.ui.define([
 			oDynamicFiltersModel.attachRequestCompleted(function () {
 				var oFilterModel = this.getModel("filter");
 				oFilterModel.getData().dynamicFilters = oDynamicFiltersModel.getData();
+				oFilterModel.setSizeLimit(oFilterModel.getData().dynamicFilters.topicCount);
 				oFilterModel.refresh(true);
 				this.createApiModel();
 			}.bind(this));
@@ -112,6 +115,25 @@ sap.ui.define([
 					}.bind(this));
 				}
 			}.bind(this));
+			var aTokens = [];
+			var iTopicCount = oFilterData.dynamicFilters.topics.length;
+			if (oApiData.appliedFilters.hasOwnProperty("topics")) {
+				oApiData.appliedFilters.topics.forEach(function (oTopic) {
+					for (var i = 0; i < iTopicCount; i++) {
+						if (oFilterData.dynamicFilters.topics[i].id === oTopic) {
+							aTokens.push(new sap.m.Token({
+								key: oTopic,
+								text: oFilterData.dynamicFilters.topics[i].name
+							}));
+							if (oFilterData.filterText.length > 0) {
+								oFilterData.filterText += ", ";
+							}
+							oFilterData.filterText += oFilterData.dynamicFilters.topics[i].name;
+						}
+					}
+				}.bind(this));
+			}
+			oFilterData.oTopicInput.setTokens(aTokens);
 			if (oApiData.appliedFilters.hasOwnProperty("i")) {
 				oFilterData.filterText = "";
 			}

@@ -31,6 +31,30 @@ sap.ui.define([
 					}
 				}
 			});
+			oFilterData.selectedTopics = [];
+			oFilterData.oTopicInput.getTokens().forEach(function (oToken) {
+				oFilterData.selectedTopics.push({
+					"id": oToken.getKey(),
+					"name": oToken.getText()
+				});
+			});
+			oFilterData.selectedTopics.sort(function (a, b) {
+				return parseFloat(a.id) - parseFloat(b.id);
+			});
+			if (oFilterData.urlParamString.length > 0 && oFilterData.selectedTopics.length > 0) {
+				oFilterData.urlParamString += "&";
+			}
+			i = 0;
+			oFilterData.selectedTopics.forEach(function (oTopic) {
+				i++;
+				if (i === 1) {
+					oFilterData.urlParamString = oFilterData.urlParamString + "t=" + oTopic.id;
+					oFilterData.apiParamString = oFilterData.apiParamString + "/t/" + oTopic.id;
+				} else {
+					oFilterData.urlParamString = oFilterData.urlParamString + "-" + oTopic.id;
+					oFilterData.apiParamString = oFilterData.apiParamString + "-" + oTopic.id;
+				}
+			});
 			if (oFilterData.urlParamString.length > 0) {
 				oFilterData.urlParamString += "&";
 			}

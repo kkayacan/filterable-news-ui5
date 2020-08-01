@@ -12,9 +12,11 @@
 			$api_url = str_replace("news", "meta/i/" . $id, $constants["api_url"]);
 			$meta = json_decode(file_get_contents($api_url), true);
 			echo '<meta property="og:title" content="' . $meta["title"] . '"/>';
+			echo '<meta property="og:description" content="' . $meta["excerpt"] . '" />';
 			echo '<meta property="og:type" content="website"/>';
 			echo '<meta property="og:url" content="' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . '"/>';
 			echo '<meta property="og:image" content="' . $meta["image"] . '"/>';
+			echo '<meta property="og:locale" content="tr_TR" />';
 		}
 	?>
 	<script

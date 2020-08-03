@@ -115,16 +115,16 @@ sap.ui.define([
 					}.bind(this));
 				}
 			}.bind(this));
-			var aTokens = [];
+			oFilterData.selectedTopics = [];
 			var iTopicCount = oFilterData.dynamicFilters.topics.length;
 			if (oApiData.appliedFilters.hasOwnProperty("topics")) {
 				oApiData.appliedFilters.topics.forEach(function (oTopic) {
 					for (var i = 0; i < iTopicCount; i++) {
 						if (oFilterData.dynamicFilters.topics[i].id === oTopic) {
-							aTokens.push(new sap.m.Token({
-								key: oTopic,
-								text: oFilterData.dynamicFilters.topics[i].name
-							}));
+							oFilterData.selectedTopics.push({
+								"id": oTopic,
+								"name": oFilterData.dynamicFilters.topics[i].name
+							});
 							if (oFilterData.filterText.length > 0) {
 								oFilterData.filterText += ", ";
 							}
@@ -132,9 +132,6 @@ sap.ui.define([
 						}
 					}
 				}.bind(this));
-			}
-			if (!$.isEmptyObject(oFilterData.oTopicInput)) {
-				oFilterData.oTopicInput.setTokens(aTokens);
 			}
 			if (oApiData.appliedFilters.hasOwnProperty("i")) {
 				oFilterData.filterText = "";

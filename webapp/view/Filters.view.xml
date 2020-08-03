@@ -16,7 +16,12 @@
 	</List>
 	<Title level="H1" text="{i18n>topics}" wrapping="true" class="sapUiMediumMarginTop sapUiMediumMarginBegin"/>
 	<MultiInput id="topicInput" width="90%" suggestionItems="{ path: 'filter>/dynamicFilters/topics', sorter: { path: 'name' } }"
-		showValueHelp="false" class="sapUiSmallMarginBegin">
-		<core:Item key="{filter>id}" text="{filter>name}"/>
+		tokens="{ path: 'filter>/selectedTopics' }" showValueHelp="false" class="sapUiSmallMarginBegin">
+		<suggestionItems>
+			<core:Item key="{filter>id}" text="{filter>name}"/>
+		</suggestionItems>
+		<tokens>
+			<Token key="{filter>id}" text="{filter>name}"/>
+		</tokens>
 	</MultiInput>
 </View>

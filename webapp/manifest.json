@@ -7,7 +7,7 @@
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
 		"applicationVersion": {
-			"version": "0.6.1"
+			"version": "0.6.2"
 		}
 	},
 	"sap.ui": {
